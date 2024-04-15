@@ -20,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             HomeView()
-                .navigationBarHidden(true) // Oculta la barra de navegación en la vista Home
+                //.navigationBarHidden(true) 
         }
     }
 }

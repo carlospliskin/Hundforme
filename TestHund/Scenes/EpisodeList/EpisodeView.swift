@@ -33,18 +33,23 @@ struct EpisodeListView: View {
         NavigationView {
             VStack {
                 SearchBar(text: $searchText)
-                    .padding(.top, 10)
                 
-                List(filteredEpisodes) { episode in
-                    VStack(alignment: .leading) {
-                        Text("Nombre: \(episode.name)")
-                        Text("Episodio: \(episode.episode)")
-                        Text("Fecha al aire: \(episode.air_date)") // Asegúrate de usar air_date en lugar de airDate
+                if filteredEpisodes.isEmpty {
+                    Text("No se encontraron episodios y/o con ese nombre.")
+                        .foregroundColor(.gray)
+                        .padding(.top, 20)
+                } else {
+                    List(filteredEpisodes) { episode in
+                        VStack(alignment: .leading) {
+                            Text("Nombre: \(episode.name)")
+                            Text("Episodio: \(episode.episode)")
+                            Text("Fecha al aire: \(episode.air_date)")
+                        }
                     }
                 }
             }
-            .navigationBarTitle("Episodios")
-            //.navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
         }
         .onAppear {
             viewModel.fetchEpisodes()
